@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <title>maze</title>
+        <script src="maze.js"></script>
+        <link rel="stylesheet" href="css/maze.css">
+    </head>
+
+    <body onload="gen()">
+        <div id="container">
+            <div id="mazecontainer">
+                
+            </div>    
+            <div id="top">
+                <input class="op" id="size" type="number" placeholder="迷宫大小（奇数）"><br>
+                <button class="op gen" onclick=gen(1)>深度优先生成迷宫</button><br>
+                <button class="op gen" onclick=gen(2)>随机Prim生成迷宫</button><br>
+                <button id="find" class="op" onclick=find()>找路</button><br>
+            </div>
+
+                
+        </div>
+    </body>
+    <script>
+        var maze;
+
+            function gen(type){
+            disable();
+
+            var n = document.getElementById("size").value;
+            if(n == null || n == ""){
+                n = 21;
+            }
+            var size = parseInt(n);
+            if(size % 2 == 0){
+                alert("请输入奇数");
+                return;
+            }
+            maze = new Maze(size);
+            maze.render(document.getElementById("mazecontainer"));
+            if(type == 1){
+                maze.depthFirstGen(document.getElementById("mazecontainer"), enable);
+            }
+            else{
+                maze.randomPrimGen(document.getElementById("mazecontainer"), enable);
+            }
+        }
+
+        function find(){
+            disable();
+            maze.findpath(document.getElementById("mazecontainer"), enable);
+        }
+        
+        function disable(){
+            document.getElementById("find").setAttribute("disabled", "true");
+            document.getElementsByClassName("gen")[0].setAttribute("disabled", "true");
+            document.getElementsByClassName("gen")[1].setAttribute("disabled", "true");
+        }
+        function enable(){
+            document.getElementById("find").removeAttribute("disabled");
+            document.getElementsByClassName("gen")[0].removeAttribute("disabled");
+            document.getElementsByClassName("gen")[1].removeAttribute("disabled");
+        }
+    </script>
+       
+</html>

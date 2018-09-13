@@ -1,0 +1,52 @@
+body{
+    background-color: rgb(204, 204, 204);
+}
+
+#container{ 
+    width:100%;  
+    height:100%;  
+    top:5%;  
+    /* border: solid 2px black; */
+    text-align: center;
+ }
+ #top{
+     /* border: solid 1px yellow; */
+     width: 20%;
+     height: 4%;
+     float: left;
+ }
+#mazecontainer{
+    height: 96%;
+    width: 50%;
+    float: left;
+    margin-left: 27.5%;
+    /* border: solid 2px green; */
+}
+#maze{
+    /* border: solid 1px red; */
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+}
+
+.current{
+    background-color: rgb(2, 141, 37);
+}
+
+.start{
+    background-color: green;
+}
+.wall{
+    background-color: rgb(0, 0, 0);
+}
+.visited{
+    background-color: white;
+}
+.op{
+    height: 50px;
+    width: 200px;
+    margin-bottom: 10px;
+}
+.road{
+    background-color: rgb(184, 184, 184);
+}
