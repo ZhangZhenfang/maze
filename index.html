@@ -24,7 +24,7 @@
     <script>
         var maze;
 
-            function gen(type){
+        function gen(type){
             disable();
 
             var n = document.getElementById("size").value;
@@ -34,6 +34,7 @@
             var size = parseInt(n);
             if(size % 2 == 0){
                 alert("请输入奇数");
+                enable();
                 return;
             }
             maze = new Maze(size);
