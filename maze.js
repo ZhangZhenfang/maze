@@ -1,30 +1,30 @@
-function Maze(n){
+function Maze(n) {
     this.n = n;
     this.maze = new Array(n);
-    for(var i = 0; i < this.maze.length; i++){
+    for(var i = 0; i < this.maze.length; i++) {
         this.maze[i] = new Array(n);
     }
-    for(var i = 0; i < this.maze.length; i++){
-        for(var j = 0; j < this.maze[i].length; j++){
+    for(var i = 0; i < this.maze.length; i++) {
+        for(var j = 0; j < this.maze[i].length; j++) {
             this.maze[i][j] = new Node(i, j);
         }
     }
-    for(var i = 1; i < this.maze.length; i += 2){
-        for(var j = 1; j < this.maze[i].length; j += 2){
+    for(var i = 1; i < this.maze.length; i += 2) {
+        for(var j = 1; j < this.maze[i].length; j += 2) {
             this.maze[i][j].type = 1;
         }
     }
 }
 
-Maze.prototype.render = function(e){
+Maze.prototype.render = function(e) {
     var maze = this.maze;
     var table = '<table id="maze">content</table>';
     var tableContent = '';
-    for(var i = 0; i < maze.length; i++){
+    for(var i = 0; i < maze.length; i++) {
         var tr = '<tr>content</tr>';
         // str = "";
         var trContent = '';
-        for(var j = 0; j < maze[i].length; j++){
+        for(var j = 0; j < maze[i].length; j++) {
             trContent += '<td class="' + (maze[i][j].type == 0 ? 'wall' : 'road') + '"></td>';
             // str += " " + maze[i][j].type;
         }
@@ -36,7 +36,7 @@ Maze.prototype.render = function(e){
     // console.log(table);
     e.innerHTML =  table;
 };
-Maze.prototype.depthFirstGen = async function(e, enable){
+Maze.prototype.depthFirstGen = async function(e, enable) {
     var n = this.n;
     var maze = this.maze;
     
@@ -48,34 +48,34 @@ Maze.prototype.depthFirstGen = async function(e, enable){
     visited[index++] = {x : startX, y : startY};
     var current = visited[1];
     maze[startX][startY].visited = true;    
-    while(index != 0){
+    while(index != 0) {
         var up = {x : current.x, y : current.y + 2};
         var right = {x : current.x + 2, y : current.y};
         var down = {x : current.x, y : current.y - 2};
         var left = {x : current.x - 2, y : current.y};
         var tmp = [];
         
-        if(!(up.x < 0 || up.x >= n || up.y < 0 || up.y >= n)){
-            if(!maze[up.x][up.y].visited){
+        if(!(up.x < 0 || up.x >= n || up.y < 0 || up.y >= n)) {
+            if(!maze[up.x][up.y].visited) {
                 tmp.push(up);
             }
         }
-        if(!(right.x < 0 || right.x >= n || right.y < 0 || right.y >= n)){
-            if(!maze[right.x][right.y].visited){
+        if(!(right.x < 0 || right.x >= n || right.y < 0 || right.y >= n)) {
+            if(!maze[right.x][right.y].visited) {
                 tmp.push(right);
             }
         }
-        if(!(down.x < 0 || down.x >= n || down.y < 0 || down.y >= n)){
-            if(!maze[down.x][down.y].visited){
+        if(!(down.x < 0 || down.x >= n || down.y < 0 || down.y >= n)) {
+            if(!maze[down.x][down.y].visited) {
                 tmp.push(down);
             }    
         }
-        if(!(left.x < 0 || left.x >= n || left.y < 0 || left.y >= n)){
-            if(!maze[left.x][left.y].visited){    
+        if(!(left.x < 0 || left.x >= n || left.y < 0 || left.y >= n)) {
+            if(!maze[left.x][left.y].visited) {    
                 tmp.push(left);
             }    
         }
-        if(tmp.length == 0){
+        if(tmp.length == 0) {
             if(index <= 2)
                 break;
             current = visited[--index];
@@ -86,8 +86,7 @@ Maze.prototype.depthFirstGen = async function(e, enable){
             var td = e.getElementsByTagName("tr")[current.x].getElementsByTagName("td")[current.y];
             td.setAttribute("class", "road");
             current = visited[index - 1];
-        }
-        else{
+        } else {
             var r = Math.ceil(Math.random() * tmp.length);
             r--;
             var rX = (tmp[r].x + current.x) / 2;
@@ -107,7 +106,7 @@ Maze.prototype.depthFirstGen = async function(e, enable){
 };
 
 
-Maze.prototype.randomPrimGen = async function(e, enable){
+Maze.prototype.randomPrimGen = async function(e, enable) {
     var n = this.n;
     var maze = this.maze;
     
@@ -119,34 +118,34 @@ Maze.prototype.randomPrimGen = async function(e, enable){
     visited[index++] = {x : startX, y : startY};
     var current = visited[1];
     maze[startX][startY].visited = true;    
-    while(index != 0){
+    while(index != 0) {
         var up = {x : current.x, y : current.y + 2};
         var right = {x : current.x + 2, y : current.y};
         var down = {x : current.x, y : current.y - 2};
         var left = {x : current.x - 2, y : current.y};
         var tmp = [];
         
-        if(!(up.x < 0 || up.x >= n || up.y < 0 || up.y >= n)){
-            if(!maze[up.x][up.y].visited){
+        if(!(up.x < 0 || up.x >= n || up.y < 0 || up.y >= n)) {
+            if(!maze[up.x][up.y].visited) {
                 tmp.push(up);
             }
         }
-        if(!(right.x < 0 || right.x >= n || right.y < 0 || right.y >= n)){
-            if(!maze[right.x][right.y].visited){
+        if(!(right.x < 0 || right.x >= n || right.y < 0 || right.y >= n)) {
+            if(!maze[right.x][right.y].visited) {
                 tmp.push(right);
             }
         }
-        if(!(down.x < 0 || down.x >= n || down.y < 0 || down.y >= n)){
-            if(!maze[down.x][down.y].visited){
+        if(!(down.x < 0 || down.x >= n || down.y < 0 || down.y >= n)) {
+            if(!maze[down.x][down.y].visited) {
                 tmp.push(down);
             }    
         }
-        if(!(left.x < 0 || left.x >= n || left.y < 0 || left.y >= n)){
-            if(!maze[left.x][left.y].visited){    
+        if(!(left.x < 0 || left.x >= n || left.y < 0 || left.y >= n)) {
+            if(!maze[left.x][left.y].visited) {    
                 tmp.push(left);
             }    
         }
-        if(tmp.length == 0){
+        if(tmp.length == 0) {
             if(index <= 1)
                 break;
             current = visited[currentIndex];
@@ -157,7 +156,7 @@ Maze.prototype.randomPrimGen = async function(e, enable){
             var td = e.getElementsByTagName("tr")[current.x].getElementsByTagName("td")[current.y];
             td.setAttribute("class", "road");
             
-            for(var i = currentIndex; i < index - 2; i++){
+            for(var i = currentIndex; i < index - 2; i++) {
                 visited[i - 1] = visited[i + 1];
                 visited[i] = visited[i + 2];
             }
@@ -165,12 +164,11 @@ Maze.prototype.randomPrimGen = async function(e, enable){
             
             currentIndex = Math.ceil(Math.random() * index);
             currentIndex--;
-            if(currentIndex % 2 == 0){
+            if(currentIndex % 2 == 0) {
                 currentIndex++;
             }
             current = visited[currentIndex];
-        }
-        else{
+        } else {
             var r = Math.ceil(Math.random() * tmp.length);
             r--;
             var rX = (tmp[r].x + current.x) / 2;
@@ -185,7 +183,7 @@ Maze.prototype.randomPrimGen = async function(e, enable){
 
             currentIndex = Math.ceil(Math.random() * index);
             currentIndex--;
-            if(currentIndex % 2 == 0){
+            if(currentIndex % 2 == 0) {
                 currentIndex++;
             }
             current = visited[currentIndex];
@@ -195,14 +193,14 @@ Maze.prototype.randomPrimGen = async function(e, enable){
     enable();
 };
 
-Maze.prototype.findpath = async function(e, enable){
+Maze.prototype.findpath = async function(e, enable) {
     var n = this.n;
     var maze = this.maze;
     var start = {x : 1, y : 1};
     var end = {x : n - 2, y : n - 2};
 
-    for(var i = 0; i < maze.length; i++){
-        for(var j = 0; j < maze[i].length; j++){
+    for(var i = 0; i < maze.length; i++) {
+        for(var j = 0; j < maze[i].length; j++) {
             maze[i][j].visited = false;
         }
     }    
@@ -212,14 +210,14 @@ Maze.prototype.findpath = async function(e, enable){
     queue[rear++] = maze[end.x][end.y];
     var current = maze[end.x][end.y];
     var pre = current;
-    while(front != rear){
+    while(front != rear) {
         pre = current;
         current = queue[front++];
         current.visited = true;
         e.getElementsByTagName("tr")[current.x].getElementsByTagName("td")[current.y].setAttribute("class", "visited");
 
-        if(current.x == start.x && current.y == start.y){
-            while(front != rear){
+        if(current.x == start.x && current.y == start.y) {
+            while(front != rear) {
                 current = queue[front++];
                 e.getElementsByTagName("tr")[current.x].getElementsByTagName("td")[current.y].setAttribute("class", "visited");
             }
@@ -230,9 +228,9 @@ Maze.prototype.findpath = async function(e, enable){
         var down = {x : current.x, y : current.y - 2};
         var left = {x : current.x - 2, y : current.y};
 
-        if(!(up.x < 0 || up.x >= n || up.y < 0 || up.y >= n)){
-            if(maze[(current.x + up.x) / 2][(current.y + up.y) / 2].type == 1){
-                if(!maze[up.x][up.y].visited){
+        if(!(up.x < 0 || up.x >= n || up.y < 0 || up.y >= n)) {
+            if(maze[(current.x + up.x) / 2][(current.y + up.y) / 2].type == 1) {
+                if(!maze[up.x][up.y].visited) {
                     maze[up.x][up.y].visited = true;
                     maze[up.x][up.y].level = current.level + 1;
                     queue[rear++] = maze[up.x][up.y];
@@ -241,9 +239,9 @@ Maze.prototype.findpath = async function(e, enable){
                 }
             }
         }
-        if(!(right.x < 0 || right.x >= n || right.y < 0 || right.y >= n)){
-            if(maze[(current.x + right.x) / 2][(current.y + right.y) / 2].type == 1){
-                if(!maze[right.x][right.y].visited){
+        if(!(right.x < 0 || right.x >= n || right.y < 0 || right.y >= n)) {
+            if(maze[(current.x + right.x) / 2][(current.y + right.y) / 2].type == 1) {
+                if(!maze[right.x][right.y].visited) {
                     maze[right.x][right.y].visited = true;
                     maze[right.x][right.y].level = current.level + 1;
                     queue[rear++] = maze[right.x][right.y];
@@ -252,9 +250,9 @@ Maze.prototype.findpath = async function(e, enable){
                 }
             }
         }
-        if(!(down.x < 0 || down.x >= n || down.y < 0 || down.y >= n)){
-            if(maze[(current.x + down.x) / 2][(current.y + down.y) / 2].type == 1){
-                if(!maze[down.x][down.y].visited){
+        if(!(down.x < 0 || down.x >= n || down.y < 0 || down.y >= n)) {
+            if(maze[(current.x + down.x) / 2][(current.y + down.y) / 2].type == 1) {
+                if(!maze[down.x][down.y].visited) {
                     maze[down.x][down.y].visited = true;
                     maze[down.x][down.y].level = current.level + 1;
                     queue[rear++] = maze[down.x][down.y];
@@ -263,9 +261,9 @@ Maze.prototype.findpath = async function(e, enable){
                 }    
             }
         }
-        if(!(left.x < 0 || left.x >= n || left.y < 0 || left.y >= n)){
-            if(maze[(current.x + left.x) / 2][(current.y + left.y) / 2].type == 1){
-                if(!maze[left.x][left.y].visited){
+        if(!(left.x < 0 || left.x >= n || left.y < 0 || left.y >= n)) {
+            if(maze[(current.x + left.x) / 2][(current.y + left.y) / 2].type == 1) {
+                if(!maze[left.x][left.y].visited) {
                     maze[left.x][left.y].visited = true;    
                     maze[left.x][left.y].level = current.level + 1;
                     queue[rear++] = maze[left.x][left.y];
@@ -278,11 +276,11 @@ Maze.prototype.findpath = async function(e, enable){
     }
     current  = maze[start.x][start.y];
     pre = current;
-    while(true){
+    while(true) {
         e.getElementsByTagName("tr")[(current.x + pre.x) / 2].getElementsByTagName("td")[(current.y + pre.y) / 2].setAttribute("class", "current");
         e.getElementsByTagName("tr")[current.x].getElementsByTagName("td")[current.y].setAttribute("class", "current");
         await sleep(20);
-        if(current.x == end.x && current.y == end.y){
+        if(current.x == end.x && current.y == end.y) {
             break;
         }
         var up = {x : current.x, y : current.y + 2};
@@ -290,36 +288,36 @@ Maze.prototype.findpath = async function(e, enable){
         var down = {x : current.x, y : current.y - 2};
         var left = {x : current.x - 2, y : current.y};
 
-        if(!(up.x < 0 || up.x >= n || up.y < 0 || up.y >= n)){
-            if(maze[(current.x + up.x) / 2][(current.y + up.y) / 2].type == 1){
-                if(maze[up.x][up.y].level == current.level - 1){
+        if(!(up.x < 0 || up.x >= n || up.y < 0 || up.y >= n)) {
+            if(maze[(current.x + up.x) / 2][(current.y + up.y) / 2].type == 1) {
+                if(maze[up.x][up.y].level == current.level - 1) {
                     pre = current;
                     current = maze[up.x][up.y];
                     continue;
                 }
             }
         }
-        if(!(right.x < 0 || right.x >= n || right.y < 0 || right.y >= n)){
-            if(maze[(current.x + right.x) / 2][(current.y + right.y) / 2].type == 1){
-                if(maze[right.x][right.y].level == current.level - 1){
+        if(!(right.x < 0 || right.x >= n || right.y < 0 || right.y >= n)) {
+            if(maze[(current.x + right.x) / 2][(current.y + right.y) / 2].type == 1) {
+                if(maze[right.x][right.y].level == current.level - 1) {
                     pre = current;
                     current = maze[right.x][right.y];
                     continue;
                 }
             }
         }
-        if(!(down.x < 0 || down.x >= n || down.y < 0 || down.y >= n)){
-            if(maze[(current.x + down.x) / 2][(current.y + down.y) / 2].type == 1){
-                if(maze[down.x][down.y].level == current.level - 1){
+        if(!(down.x < 0 || down.x >= n || down.y < 0 || down.y >= n)) {
+            if(maze[(current.x + down.x) / 2][(current.y + down.y) / 2].type == 1) {
+                if(maze[down.x][down.y].level == current.level - 1) {
                     pre = current;
                     current = maze[down.x][down.y];
                     continue;
                 }  
             }
         }
-        if(!(left.x < 0 || left.x >= n || left.y < 0 || left.y >= n)){
-            if(maze[(current.x + left.x) / 2][(current.y + left.y) / 2].type == 1){
-                if(maze[left.x][left.y].level == current.level - 1){
+        if(!(left.x < 0 || left.x >= n || left.y < 0 || left.y >= n)) {
+            if(maze[(current.x + left.x) / 2][(current.y + left.y) / 2].type == 1) {
+                if(maze[left.x][left.y].level == current.level - 1) {
                     pre = current;
                     current = maze[left.x][left.y];
                     continue;
@@ -332,7 +330,7 @@ Maze.prototype.findpath = async function(e, enable){
     enable();
 };
 
-function Node(x, y){
+function Node(x, y) {
     this.x = x;
     this.y = y;
     this.level = 0;
