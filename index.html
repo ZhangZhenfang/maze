@@ -24,40 +24,39 @@
     <script>
         var maze;
 
-        function gen(type){
+        function gen(type) {
             disable();
 
             var n = document.getElementById("size").value;
-            if(n == null || n == ""){
+            if(n == null || n == "") {
                 n = 21;
             }
             var size = parseInt(n);
-            if(size % 2 == 0){
+            if(size % 2 == 0) {
                 alert("请输入奇数");
                 enable();
                 return;
             }
             maze = new Maze(size);
             maze.render(document.getElementById("mazecontainer"));
-            if(type == 1){
+            if(type == 1) {
                 maze.depthFirstGen(document.getElementById("mazecontainer"), enable);
-            }
-            else{
+            } else {
                 maze.randomPrimGen(document.getElementById("mazecontainer"), enable);
             }
         }
 
-        function find(){
+        function find() {
             disable();
             maze.findpath(document.getElementById("mazecontainer"), enable);
         }
         
-        function disable(){
+        function disable() {
             document.getElementById("find").setAttribute("disabled", "true");
             document.getElementsByClassName("gen")[0].setAttribute("disabled", "true");
             document.getElementsByClassName("gen")[1].setAttribute("disabled", "true");
         }
-        function enable(){
+        function enable() {
             document.getElementById("find").removeAttribute("disabled");
             document.getElementsByClassName("gen")[0].removeAttribute("disabled");
             document.getElementsByClassName("gen")[1].removeAttribute("disabled");
