@@ -114,6 +114,7 @@ Maze.prototype.randomPrimGen = async function(e, enable) {
     var startY = 1;
     var visited = [];
     var index = 1;
+    var currentIndex = 0;
     visited[0] = {x : 1, y : 1};
     visited[index++] = {x : startX, y : startY};
     var current = visited[1];
